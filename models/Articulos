@@ -1,0 +1,39 @@
+const mongoose = require('mongoose');
+
+// Definición del esquema del artículo
+const articuloSchema = new mongoose.Schema({
+  codigo: {
+    type: String,
+    required: true,
+    unique: true // Aseguramos que el código del artículo sea único
+  },
+  nombre: {
+    type: String,
+    required: true
+  },
+  foto: {
+    type: String, // Podrías guardar la URL de la foto o el nombre de archivo
+    required: true
+  },
+  descripcion: {
+    type: String,
+    required: true
+  },
+  cantidadDisponible: {
+    type: Number,
+    required: true,
+    min: 0 // No puede ser negativo
+  },
+  precio: {
+    type: Number,
+    required: true,
+    min: 0 // El precio no puede ser negativo
+  }
+}, {
+  timestamps: true // Guarda la fecha de creación y actualización
+});
+
+// Crear el modelo basado en el esquema
+const Articulo = mongoose.model('Articulo', articuloSchema);
+
+module.exports = Articulo;
